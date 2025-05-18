@@ -1,0 +1,44 @@
+Initialize (Main Queue) --> 17:21:29
+Idle (Main Queue) --> 17:21:29
+State - Load Firmware (Main Queue) --> 17:21:29
+State - Connected (Main Queue) --> 17:21:44
+State - Initialize (Main Queue) --> 17:21:44
+State - Initialize2 (Main Queue) --> 17:21:44
+State - Reconcile Registers (Main Queue) --> 17:21:44
+State - Enable Controls (Main Queue) --> 17:21:48
+State - Enable Print (Main Queue) --> 17:21:48
+Read Version Info (Main Queue) --> 17:21:48
+User Input - Update Data Rate (Main Queue) --> 17:21:48
+CalculateFin (Main Queue) --> 17:21:48
+State - ReadUserRegisters (Main Queue) --> 17:21:48
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+Update Front Panel (Main Queue) --> 17:21:49
+User Input - Update Data Rate (Main Queue) --> 17:21:49
+CalculateFin (Main Queue) --> 17:21:49
+Exit (Main Queue) --> 17:21:55

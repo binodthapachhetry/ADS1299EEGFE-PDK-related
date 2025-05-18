@@ -1,0 +1,60 @@
+Log started 05/17/2025 at 02:04:01
+Preferred installation mode : win32
+Trying to init installer in mode win32
+Mode win32 successfully initialized
+[02:04:05] ---INITIALIZATION ACTIONS---
+[02:04:05] Logging system information to installation log file  to assist with troubleshooting installation issues. 
+If you encounter an issue during installation, please email this log file with a discription of the problem to pa_deltasigma_apps@ti.com.
+[02:04:05] Operating System: Windows 10 Standard Service Pack 0 (Version #: 10.0)
+[02:04:05] OS is 64-bits
+[02:04:05] System Locale: en
+[02:04:37] Detected an active Windows antivirus program...
+[02:04:37] Detected an active firewall program...
+[02:04:37] UAC Enabled: 1
+[02:04:37] Installer is running as administrator: 1
+[02:04:37] The installation directory is located at: C:\Program Files (x86)\ADS1299EEG-FE
+[02:04:37] Free disk space = 933246164 KB (163140 KB required).
+[02:04:37] ---PRE-INSTALLATION ACTIONS---
+Preparing to Install
+[02:04:49] ---READY TO INSTALL ACTIONS---
+Preparing to Install
+Creating directory C:\Users\ammar\AppData\Local\Temp\ADS1299EEGFE
+Creating directory C:\Users\ammar\AppData\Local\Temp\ADS1299EEGFE\source
+Unpacking files
+Unpacking C:\Users\ammar\AppData\Local\Temp\ADS1299EEGFE\ads1299-eeg-fe-1.0.2.exe
+Directory already exists: C:\Program Files (x86)\ADS1299EEG-FE\lib_1299
+Unpacking files
+Unpacking C:\Program Files (x86)\ADS1299EEG-FE\lib_1299\libusb-win32-src-1.2.6.0.zip
+Creating directory C:\Users\ammar\AppData\Local\Temp\ADS1299EEGFE\mmb0
+Unpacking files
+Unpacking C:\Users\ammar\AppData\Local\Temp\ADS1299EEGFE\mmb0\mmb0_sch_d.pdf
+Unpacking C:\Users\ammar\AppData\Local\Temp\ADS1299EEGFE\mmb0\mmb0_driver_install_x64-v2.0.0.0.msi
+Unpacking C:\Users\ammar\AppData\Local\Temp\ADS1299EEGFE\mmb0\mmb0_driver_install_x86-v2.0.0.0.msi
+Directory already exists: C:\Program Files (x86)\ADS1299EEG-FE\licenses
+Unpacking files
+Unpacking C:\Program Files (x86)\ADS1299EEG-FE\licenses\TI License.pdf
+Unpacking C:\Program Files (x86)\ADS1299EEG-FE\licenses\NI License.pdf
+Unpacking C:\Program Files (x86)\ADS1299EEG-FE\licenses\ADS1299EEGFE-PDK-SW_1.0.2_manifest.html
+[02:05:27] ---POST-INSTALLATION ACTIONS---
+Launching installer...
+Executing C:\Users\ammar\AppData\Local\Temp\ADS1299EEGFE\ads1299-eeg-fe-1.0.2.exe 
+Script exit code: 0
+
+Script output:
+ 
+
+Script stderr:
+ 
+
+Executing msiexec /i "C:\Users\ammar\AppData\Local\Temp\ADS1299EEGFE\mmb0\mmb0_driver_install_x64-v2.0.0.0.msi" /norestart /qn /log "C:\Users\ammar\AppData\Local\Temp\ADS1299EEGFE\mmb0\mmb0_x64_driver_install.log"
+Script exit code: 0
+
+Script output:
+ 
+
+Script stderr:
+ 
+
+Installation completed
+Log finished 05/17/2025 at 02:11:40
+[02:11:46] ---FINAL PAGE ACTIONS---

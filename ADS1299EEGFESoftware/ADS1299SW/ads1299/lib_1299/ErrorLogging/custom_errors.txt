@@ -1,0 +1,12 @@
+This file contains custom error codes and descriptions.
+
+Format:
+#Error code: Description
+
+Example:
+#5001: Unknown data type
+<-------------------------------------------------------------------->
+[ERRORS]
+#5001: This is a test error
+#5002: THIS IS THE SECOND TEST
+<End of File>
