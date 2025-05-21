@@ -195,6 +195,14 @@ void spi_cs_high(void);
 void spi_read_ads1299_data(Uint8* buffer);
 int BlockQueue_write(long* data, long count);
 
+/* Define GPIO pin types if not already defined */
+#ifndef GPIO_PIN0
+#define GPIO_PIN0 0
+#endif
+#ifndef GPIO_PIN1
+#define GPIO_PIN1 1
+#endif
+
 /* Fast interrupt handler for ADS1299 DRDY pin */
 IDECL void    IRQ_handleADS1299DataReady(void);
 
