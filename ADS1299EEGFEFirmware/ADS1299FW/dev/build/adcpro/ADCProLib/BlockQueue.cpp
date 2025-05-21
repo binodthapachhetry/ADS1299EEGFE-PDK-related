@@ -72,20 +72,23 @@ long* BlockQueue::reserveStart(long& count)
 
 long* BlockQueue::startWrite(long& count)
 {
+    // Fast path: if queue is full, return immediately
     if ((_writePos==_readPos)&&_len) {
         count=0;
         return 0;
     }
     
+    // If read position is ahead of write position, we can write directly
     if (_readPos>_writePos) {
         return reserveMiddle(count);
     }
     
+    // Try to write at the end of the queue first
     long* p;
     long c=count;
     p=reserveEnd(c);
     if (!p)
-        p=reserveStart(count);
+        p=reserveStart(count); // If end is full, try beginning
     else
         count=c;
     return p;

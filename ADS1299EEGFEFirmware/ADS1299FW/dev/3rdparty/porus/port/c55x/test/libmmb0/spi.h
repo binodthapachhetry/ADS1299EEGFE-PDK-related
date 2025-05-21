@@ -30,6 +30,12 @@ inline extern u8 spi_r8(void)
 	return spi_shift8(0xff);
 }
 
+// Fast read of ADS1299 data (33 bytes: 24-bit × 8 channels + status)
+inline extern void spi_read_ads1299_data(u8* buffer)
+{
+	spi_read_burst(buffer, 33);
+}
+
 void spi_init(void);
 s32 spi_rs24(void);
 

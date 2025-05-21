@@ -87,6 +87,13 @@ public:
     inline long* getReadEnd(){ return _readEnd; }
     inline long* getStart(){ return _start; }
     
+    // Check if queue has enough space for the given number of samples
+    inline bool hasSpace(long count) const { return (getMaxLen() - _len) >= count; }
+    // Check if queue is empty
+    inline bool isEmpty() const { return _len == 0; }
+    // Check if queue is full
+    inline bool isFull() const { return _len == getMaxLen(); }
+    
 };
 
 #endif

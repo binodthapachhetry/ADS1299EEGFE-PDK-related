@@ -33,6 +33,7 @@ void spi_read_burst(u8* data, u16 len)
 	for(i=0; i<len; i++) {
 		data[i] = spi_shift8(0xFF); // Read with dummy TX
 	}
+	spi_flush(); // Ensure all data is transferred before returning
 }
 
 s32 spi_rs24(void)
