@@ -38,6 +38,9 @@ inline extern void spi_read_ads1299_data(u8* buffer)
 	spi_read_burst(buffer, 33);
 }
 
+/* Define ADS1299 chip select GPIO pin */
+#define ADS1299_CS_GPIO GPIO_PIN3
+
 void spi_init(void);
 void spi_cs_low(void);
 void spi_cs_high(void);

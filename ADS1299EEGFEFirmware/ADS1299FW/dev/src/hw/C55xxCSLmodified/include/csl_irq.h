@@ -189,6 +189,12 @@ IDECL void    IRQ_setArg(Uint16 EventId, Uint32 val);
 IDECL int     IRQ_setVecs(Uint32 Ivpd);
 IDECL CSLBool IRQ_test(Uint16 EventId);
 
+/* Forward declarations for functions used in the interrupt handler */
+void spi_cs_low(void);
+void spi_cs_high(void);
+void spi_read_ads1299_data(Uint8* buffer);
+int BlockQueue_write(long* data, long count);
+
 /* Fast interrupt handler for ADS1299 DRDY pin */
 IDECL void    IRQ_handleADS1299DataReady(void);
 

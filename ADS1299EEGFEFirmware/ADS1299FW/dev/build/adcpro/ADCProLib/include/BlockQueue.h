@@ -6,13 +6,13 @@
 #include <iostream>
 #endif
 
+#include <csl_gpio.h> /* For GPIO_toggle */
+
 class BlockQueue
 {
 #ifdef BLOCKQUEUE_TEST
     friend std::ostream& operator<<(std::ostream& o, BlockQueue& cr);
 #endif
-
-#include <csl_gpio.h> /* For GPIO_toggle */
 
 private:
     long* _start;         // beginning of queue memory
