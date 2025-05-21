@@ -192,6 +192,35 @@ IDECL CSLBool IRQ_test(Uint16 EventId);
 /* Fast interrupt handler for ADS1299 DRDY pin */
 IDECL void    IRQ_handleADS1299DataReady(void);
 
+/* Implementation of the ADS1299 data ready interrupt handler */
+#ifdef USEDEFS
+IDEF void IRQ_handleADS1299DataReady(void) {
+  /* Toggle debug LED to indicate interrupt activity */
+  GPIO_toggle(DEBUG_LED_PIN);
+  
+  /* Read ADS1299 data (33 bytes: 24-bit × 8 channels + status) */
+  u8 buffer[33];
+  
+  /* Assert chip select (active low) */
+  spi_cs_low();
+  
+  /* Read all 33 bytes of data */
+  spi_read_burst(buffer, 33);
+  
+  /* Deassert chip select */
+  spi_cs_high();
+  
+  /* Write data to block queue for USB transmission */
+  /* If queue is full, toggle error LED */
+  if (!BlockQueue_write((long*)buffer, 33)) {
+    GPIO_toggle(ERROR_LED_PIN);
+  }
+  
+  /* Clear the interrupt flag */
+  IRQ_clear(ADS1299_DRDY_INT);
+}
+#endif
+
 /****************************************\
 * IRQ inline function definitions
 \****************************************/

@@ -179,10 +179,22 @@ long BlockQueue::write(long* data, long count)
 {
     long* dest=startWrite(count);
     if (!dest||!count) return 0;
+    
+    /* Toggle debug pin on successful write to monitor data flow */
+    GPIO_toggle(DEBUG_PIN);
+    
     for (long i=0; i<count; ++i)
         *dest++=data[i];
     finishWrite();
     return count;
+}
+
+/* Helper function for C code to write to BlockQueue */
+extern "C" int BlockQueue_write(long* data, long count)
+{
+    /* Access the global queue instance */
+    extern BlockQueue g_dataQueue;
+    return g_dataQueue.write(data, count);
 }
 
 long* BlockQueue::startRead(long& count)

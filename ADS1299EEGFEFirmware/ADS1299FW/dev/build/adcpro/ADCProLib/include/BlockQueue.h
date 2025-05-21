@@ -96,4 +96,16 @@ public:
     
 };
 
+/* C interface for BlockQueue */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* Write data to the global BlockQueue instance */
+int BlockQueue_write(long* data, long count);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

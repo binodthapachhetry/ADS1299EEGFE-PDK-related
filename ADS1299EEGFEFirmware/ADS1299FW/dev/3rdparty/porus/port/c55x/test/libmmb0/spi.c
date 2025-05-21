@@ -36,6 +36,12 @@ void spi_read_burst(u8* data, u16 len)
 	spi_flush(); // Ensure all data is transferred before returning
 }
 
+/* Optimized function to read ADS1299 data (33 bytes: 24-bit × 8 channels + status) */
+void spi_read_ads1299_data(u8* buffer)
+{
+	spi_read_burst(buffer, 33);
+}
+
 s32 spi_rs24(void)
 {
 	s32 data;
