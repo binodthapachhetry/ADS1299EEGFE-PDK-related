@@ -195,6 +195,9 @@ void spi_cs_high(void);
 void spi_read_ads1299_data(Uint8* buffer);
 int BlockQueue_write(long* data, long count);
 
+/* Forward declaration for GPIO_toggle function */
+void GPIO_toggle(Uint16 pinNumber);
+
 /* Define GPIO pin types if not already defined */
 #ifndef GPIO_PIN0
 #define GPIO_PIN0 0
