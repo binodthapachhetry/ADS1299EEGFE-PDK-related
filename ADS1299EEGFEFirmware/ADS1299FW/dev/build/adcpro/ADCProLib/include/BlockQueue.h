@@ -12,6 +12,8 @@ class BlockQueue
     friend std::ostream& operator<<(std::ostream& o, BlockQueue& cr);
 #endif
 
+#include <csl_gpio.h> /* For GPIO_toggle */
+
 private:
     long* _start;         // beginning of queue memory
     long* _end;           // end of queue memory (adr of last elm + 1)
@@ -95,6 +97,9 @@ public:
     inline bool isFull() const { return _len == getMaxLen(); }
     
 };
+
+/* Define DEBUG_PIN for BlockQueue data flow monitoring */
+#define DEBUG_PIN GPIO_PIN2
 
 /* C interface for BlockQueue */
 #ifdef __cplusplus

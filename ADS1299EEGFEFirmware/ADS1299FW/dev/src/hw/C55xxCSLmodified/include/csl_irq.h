@@ -194,25 +194,30 @@ IDECL void    IRQ_handleADS1299DataReady(void);
 
 /* Implementation of the ADS1299 data ready interrupt handler */
 #ifdef USEDEFS
+/* Pin and interrupt definitions */
+#define DEBUG_LED_PIN   GPIO_PIN0  /* Debug LED for interrupt activity */
+#define ERROR_LED_PIN   GPIO_PIN1  /* Error LED for queue overflow */
+#define ADS1299_DRDY_INT IRQ_EVT_INT0  /* ADS1299 DRDY interrupt */
+
 IDEF void IRQ_handleADS1299DataReady(void) {
   /* Toggle debug LED to indicate interrupt activity */
   GPIO_toggle(DEBUG_LED_PIN);
   
   /* Read ADS1299 data (33 bytes: 24-bit × 8 channels + status) */
-  u8 buffer[33];
+  Uint16 buffer[17]; /* 33 bytes = 16.5 words, round up to 17 */
   
   /* Assert chip select (active low) */
   spi_cs_low();
   
   /* Read all 33 bytes of data */
-  spi_read_burst(buffer, 33);
+  spi_read_ads1299_data((Uint8*)buffer);
   
   /* Deassert chip select */
   spi_cs_high();
   
   /* Write data to block queue for USB transmission */
   /* If queue is full, toggle error LED */
-  if (!BlockQueue_write((long*)buffer, 33)) {
+  if (!BlockQueue_write((long*)buffer, 17)) {
     GPIO_toggle(ERROR_LED_PIN);
   }
   
