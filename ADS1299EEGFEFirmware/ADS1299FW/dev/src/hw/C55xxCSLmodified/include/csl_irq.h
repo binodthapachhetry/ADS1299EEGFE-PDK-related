@@ -205,6 +205,12 @@ void GPIO_toggle(Uint16 pinNumber);
 #ifndef GPIO_PIN1
 #define GPIO_PIN1 1
 #endif
+#ifndef GPIO_PIN2
+#define GPIO_PIN2 2
+#endif
+#ifndef GPIO_PIN3
+#define GPIO_PIN3 3
+#endif
 
 /* Fast interrupt handler for ADS1299 DRDY pin */
 IDECL void    IRQ_handleADS1299DataReady(void);
@@ -221,7 +227,7 @@ IDEF void IRQ_handleADS1299DataReady(void) {
   GPIO_toggle(DEBUG_LED_PIN);
   
   /* Read ADS1299 data (33 bytes: 24-bit × 8 channels + status) */
-  Uint16 buffer[17]; /* 33 bytes = 16.5 words, round up to 17 */
+  static Uint16 buffer[17]; /* 33 bytes = 16.5 words, round up to 17 */
   
   /* Assert chip select (active low) */
   spi_cs_low();
