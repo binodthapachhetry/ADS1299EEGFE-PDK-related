@@ -1,5 +1,6 @@
 
 #include "spi.h"
+#include "csl_gpio.h"
 
 static MCBSP_Handle mcbsp;
 
@@ -14,6 +15,24 @@ u8 spi_shift8(u8 d)
 void spi_flush(void)
 {
 	while (MCBSP_xempty(mcbsp));
+}
+
+void spi_cs_low(void)
+{
+	GPIO_write(ADS1299_CS_GPIO, 0); // Active low
+}
+
+void spi_cs_high(void)
+{
+	GPIO_write(ADS1299_CS_GPIO, 1);
+}
+
+void spi_read_burst(u8* data, u16 len)
+{
+	u16 i;
+	for(i=0; i<len; i++) {
+		data[i] = spi_shift8(0xFF); // Read with dummy TX
+	}
 }
 
 s32 spi_rs24(void)
@@ -31,5 +50,9 @@ void spi_init(void)
 {
 	mcbsp=MCBSP_open(MCBSP_PORT1,MCBSP_OPEN_RESET);
 	MCBSP_config(mcbsp,&MCBSP_slowspi);
-	//MCBSP_start?
+	
+	// Initialize CS pin as GPIO output high
+	GPIO_pinEnable(ADS1299_CS_GPIO);
+	GPIO_pinDirection(ADS1299_CS_GPIO, GPIO_OUTPUT);
+	spi_cs_high();
 }
