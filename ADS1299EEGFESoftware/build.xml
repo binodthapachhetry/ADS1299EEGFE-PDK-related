@@ -1,0 +1,13 @@
+<!-- Add HeadlessRecorder to the build and runnable JAR manifest -->
+
+<!-- ... existing build.xml content ... -->
+
+<target name="jar" depends="compile">
+    <jar destfile="ADS1299EEGFESoftware.jar" basedir="build/classes">
+        <manifest>
+            <attribute name="Main-Class" value="com.ti.ads1299tools.HeadlessRecorder"/>
+        </manifest>
+    </jar>
+</target>
+
+<!-- ... rest of build.xml ... -->
