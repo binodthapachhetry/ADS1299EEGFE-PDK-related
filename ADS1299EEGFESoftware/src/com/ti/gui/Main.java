@@ -15,6 +15,14 @@ public class Main {
             frame.setSize(400, 200);
             frame.add(new JLabel("ADS1299 EEG FE GUI Loaded", SwingConstants.CENTER), BorderLayout.CENTER);
             frame.setVisible(true);
+
+            try (com.ti.usb.DeviceManager dm = com.ti.usb.DeviceManager.openFirstADS1299()) {
+                // optional: start StreamEngine here
+            } catch (org.usb4java.LibUsbException ex) {
+                JOptionPane.showMessageDialog(null,
+                        "USB error: " + ex.getMessage(),
+                        "ADS1299", JOptionPane.ERROR_MESSAGE);
+            }
         });
     }
 }
