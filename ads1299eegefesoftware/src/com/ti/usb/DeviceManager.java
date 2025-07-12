@@ -1,7 +1,8 @@
+package com.ti.usb;
 
 import org.usb4java.*;
 
-public class DeviceManager {
+public class DeviceManager implements AutoCloseable {
     private final DeviceHandle handle;
     private static final short VID = (short)0x0451;   // TODO confirm
     private static final short PID = (short)0xEEDD;   // TODO confirm
@@ -21,6 +22,7 @@ public class DeviceManager {
 
     private DeviceManager(DeviceHandle h) { this.handle = h; }
 
+    @Override
     public void close() {
         if (handle != null) {
             LibUsb.releaseInterface(handle, 0);
