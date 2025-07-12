@@ -4,8 +4,16 @@ import org.usb4java.*;
 
 public class DeviceManager implements AutoCloseable {
     private final DeviceHandle handle;
-    private static final short VID = (short)0x0451;   // TODO confirm
-    private static final short PID = (short)0xEEDD;   // TODO confirm
+    /*  Vendor / Product IDs can be overridden at launch with
+        -Dads1299.usb.vid=0xXXXX  -Dads1299.usb.pid=0xYYYY              */
+    private static final short VID = parseId("ads1299.usb.vid", 0x0451);
+    private static final short PID = parseId("ads1299.usb.pid", 0xEEDD);
+
+    private static short parseId(String prop, int defaultVal) {
+        String v = System.getProperty(prop);
+        return (short) (v == null ? defaultVal
+                                  : Integer.decode(v) & 0xFFFF);
+    }
 
     public static DeviceManager openFirstADS1299() throws LibUsbException {
         UsbUtil.init();
