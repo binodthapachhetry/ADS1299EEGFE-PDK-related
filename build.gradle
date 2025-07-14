@@ -12,6 +12,20 @@ repositories {
     mavenCentral()
 }
 
+/* ─── ADD THIS BLOCK ─────────────────────────────────────────────── */
+sourceSets {
+    main {
+        java {
+            // two trees hold the actual .java files
+            srcDirs = [
+                'ADS1299EEGFESoftware/src',      // GUI package
+                'ads1299eegefesoftware/src'      // USB helper package
+            ]
+        }
+    }
+}
+/* ────────────────────────────────────────────────────────────────── */
+
 dependencies {
     implementation 'org.usb4java:usb4java:1.3.0'
     // Intel (x86_64) Macs ─────────────────────────────────────
