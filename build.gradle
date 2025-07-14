@@ -17,10 +17,7 @@ sourceSets {
     main {
         java {
             // two trees hold the actual .java files
-            srcDirs = [
-                'ADS1299EEGFESoftware/src',      // GUI package
-                'ads1299eegefesoftware/src'      // USB helper package
-            ]
+            srcDirs = ['ADS1299EEGFESoftware/src']
         }
     }
 }

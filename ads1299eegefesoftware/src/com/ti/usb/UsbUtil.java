@@ -1,8 +1,7 @@
 package com.ti.usb;
 
 import org.usb4java.*;
-
-import org.usb4java.*;
+import java.nio.ByteBuffer;
 
 public class UsbUtil {
     public static Context ctx;
@@ -42,21 +41,23 @@ public class UsbUtil {
     }
 
     public static byte[] bulkRead(DeviceHandle h, int ep, int len, int timeout) throws LibUsbException {
-        byte[] buf = new byte[len];
+        ByteBuffer buf = ByteBuffer.allocateDirect(len);
         int[] transferred = new int[1];
-        int r = LibUsb.bulkTransfer(h, (byte)ep, buf, transferred, timeout);
+        int r = LibUsb.bulkTransfer(h, (byte) ep, buf, transferred, timeout);
         if (r != LibUsb.SUCCESS)
             throw new LibUsbException("Bulk read failed", r);
-        if (transferred[0] == len)
-            return buf;
-        byte[] trimmed = new byte[transferred[0]];
-        System.arraycopy(buf, 0, trimmed, 0, transferred[0]);
-        return trimmed;
+        byte[] out = new byte[transferred[0]];
+        buf.rewind();
+        buf.get(out, 0, transferred[0]);
+        return out;
     }
 
-    public static int bulkWrite(DeviceHandle h, int ep, byte[] buf, int timeout) throws LibUsbException {
+    public static int bulkWrite(DeviceHandle h, int ep, byte[] data, int timeout) throws LibUsbException {
+        ByteBuffer buf = ByteBuffer.allocateDirect(data.length);
+        buf.put(data);
+        buf.rewind();
         int[] transferred = new int[1];
-        int r = LibUsb.bulkTransfer(h, (byte)ep, buf, transferred, timeout);
+        int r = LibUsb.bulkTransfer(h, (byte) ep, buf, transferred, timeout);
         if (r != LibUsb.SUCCESS)
             throw new LibUsbException("Bulk write failed", r);
         return transferred[0];
