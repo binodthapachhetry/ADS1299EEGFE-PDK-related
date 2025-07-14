@@ -31,6 +31,13 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
 }
 
+// For Apple Silicon (darwin-aarch64) users who have built their own JNI library,
+// ensure the native .dylib is found at runtime:
+run {
+    // Adjust the path below to where you placed your self-built libusb4java.dylib
+    jvmArgs "-Djava.library.path=${rootDir}/usb4java/native"
+}
+
 application {
     mainClass = 'com.ti.gui.Main'
 }
