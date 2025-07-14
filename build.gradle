@@ -35,7 +35,7 @@ dependencies {
 // ensure the native .dylib is found at runtime:
 run {
     // Adjust the path below to where you placed your self-built libusb4java.dylib
-    jvmArgs "-Djava.library.path=${rootDir}/usb4java/native"
+    jvmArgs "-Djava.library.path=${rootDir}/libusb4java/src"
 }
 
 application {
