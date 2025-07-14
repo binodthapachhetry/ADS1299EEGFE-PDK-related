@@ -19,4 +19,7 @@ if [ ! -f "$JAR" ] || ! unzip -t -qq "$JAR" >/dev/null 2>&1 ; then
   rm -f "$TMP_ZIP"
 fi
 
-exec java -jar "$DIR/gradle/wrapper/gradle-wrapper.jar" "$@"
+# Choose java from JAVA_HOME when set, else fall back to PATH
+JAVA_CMD="${JAVA_HOME:+${JAVA_HOME}/bin/}java"
+exec "$JAVA_CMD" -classpath "$DIR/gradle/wrapper/gradle-wrapper.jar" \
+     org.gradle.wrapper.GradleWrapperMain "$@"
