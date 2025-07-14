@@ -34,8 +34,7 @@ dependencies {
 // For Apple Silicon (darwin-aarch64) users who have built their own JNI library,
 // ensure the native .dylib is found at runtime:
 run {
-    // make Gradle pass the directory *containing* libusb4java.dylib to the JVM
-    jvmArgs "-Djava.library.path=${rootDir.absolutePath}/libusb4java/src"
+    // No java.library.path override needed; usb4java loads native library from resources
 }
 
 application {
