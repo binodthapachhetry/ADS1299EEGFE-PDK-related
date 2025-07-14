@@ -15,7 +15,8 @@ if [ ! -f "$JAR" ] || ! unzip -t -qq "$JAR" >/dev/null 2>&1 ; then
              | cut -d'=' -f2-)
   TMP_ZIP="$DIR/gradle/wrapper/gradle-dist.zip"
   curl -L "$DIST_URL" -o "$TMP_ZIP"
-  unzip -p "$TMP_ZIP" '*/lib/gradle-wrapper.jar' > "$JAR" && rm -f "$TMP_ZIP"
+  # Gradle ≥5 ships the file as gradle-wrapper-<ver>.jar – grab it and rename
+  unzip -p "$TMP_ZIP" '*/lib/gradle-wrapper-*.jar' > "$JAR" && rm -f "$TMP_ZIP"
 fi
 
 # Choose java from JAVA_HOME when set, else fall back to PATH
