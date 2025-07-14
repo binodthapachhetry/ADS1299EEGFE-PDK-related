@@ -19,6 +19,9 @@ sourceSets {
             // two trees hold the actual .java files
             srcDirs = ['ADS1299EEGFESoftware/src']
         }
+        resources {
+            srcDirs = ['ADS1299EEGFESoftware/src/main/resources']
+        }
     }
 }
 /* ────────────────────────────────────────────────────────────────── */
