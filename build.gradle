@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group   = 'com.ti'
+version = '1.0.0'
+
+sourceCompatibility = JavaVersion.VERSION_11   // or 17 – match your JDK
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.usb4java:usb4java:1.3.0'
+    runtimeOnly   'org.usb4java:usb4java-natives-osx:1.3.0'
+    testImplementation 'junit:junit:4.13.2'
+}
+
+application {
+    mainClass = 'com.ti.gui.Main'
+}
