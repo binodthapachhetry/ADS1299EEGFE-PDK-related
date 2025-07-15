@@ -28,6 +28,10 @@ public class DeviceManager implements AutoCloseable {
     private static final short VID = parseId("ads1299.usb.vid", 0x0451);
     private static final short PID = parseId("ads1299.usb.pid", 0x9001);
 
+    /* Endpoint numbers taken from lsusb ‑v descriptor dump               */
+    private static final byte EP_OUT = 0x06;   // Bulk-OUT  (0x06)
+    private static final byte EP_IN  = (byte) 0x86; // Bulk-IN  (6 | 0x80)
+
     private static short parseId(String prop, int defaultVal) {
         String v = System.getProperty(prop);
         return (short) (v == null ? defaultVal
@@ -67,6 +71,10 @@ public class DeviceManager implements AutoCloseable {
         if (r != LibUsb.SUCCESS)
             throw new LibUsbException("Unable to open device", r);
         LibUsb.claimInterface(h, 0);     // assuming interface 0
+        // select alt-setting 1 which holds the streaming IN endpoint
+        r = LibUsb.setInterfaceAltSetting(h, 0, 1);
+        if (r != LibUsb.SUCCESS)
+            throw new LibUsbException("Alt-setting switch failed", r);
         return new DeviceManager(h);
     }
 
@@ -82,16 +90,16 @@ public class DeviceManager implements AutoCloseable {
     }
 
     public byte[] readSamples(int bytes) throws LibUsbException {
-        return UsbUtil.bulkRead(handle, 0x81, bytes, 1000); // EP 0x81 IN
+        return UsbUtil.bulkRead(handle, EP_IN, bytes, 1000);
     }
 
     public int writeCommand(byte[] cmd) throws LibUsbException {
-        return UsbUtil.bulkWrite(handle, 0x01, cmd, 1000);  // EP 0x01 OUT
+        return UsbUtil.bulkWrite(handle, EP_OUT, cmd, 1000);
     }
 
-    /** Returns number of bytes obtained from a quick, non-blocking read. */
+    /** quick, non-blocking read */
     public int probeRead() throws LibUsbException {
-        byte[] data = UsbUtil.bulkRead(handle, 0x81, 24, 250);   // 1 packet
+        byte[] data = UsbUtil.bulkRead(handle, EP_IN, 24, 250);
         return data.length;
     }
 }
