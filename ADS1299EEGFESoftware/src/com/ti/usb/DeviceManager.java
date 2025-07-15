@@ -96,8 +96,20 @@ public class DeviceManager implements AutoCloseable {
         return UsbUtil.bulkWrite(handle, EP_OUT, cmd, 1000);
     }
 
-    /** quick, non-blocking read */
+    /** quick, non-blocking read.
+     *  If the device requires a "start streaming" command before sending data,
+     *  this method will attempt to send a 1-byte RDATAC (0x10) command to EP_OUT
+     *  before reading from EP_IN. This mimics the Windows GUI startup sequence.
+     */
     public int probeRead() throws LibUsbException {
+        // RDATAC command (0x10) is standard for ADS1299 to start continuous streaming
+        byte[] rdatac = new byte[] { 0x10 };
+        try {
+            writeCommand(rdatac);
+        } catch (LibUsbException ex) {
+            // If the command fails, log but continue to try reading anyway
+            System.err.println("Warning: Failed to send RDATAC start command: " + ex.getMessage());
+        }
         byte[] data = UsbUtil.bulkRead(handle, EP_IN, 24, 250);
         return data.length;
     }
