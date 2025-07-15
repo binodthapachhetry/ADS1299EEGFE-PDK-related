@@ -26,11 +26,13 @@ public class DeviceManager implements AutoCloseable {
     /*  Vendor / Product IDs can be overridden at launch with
         -Dads1299.usb.vid=0xXXXX  -Dads1299.usb.pid=0xYYYY              */
     private static final short VID = parseId("ads1299.usb.vid", 0x0451);
-    private static final short PID = parseId("ads1299.usb.pid", 0x9001);
+    // Default PID now matches application/streaming mode (0x5718)
+    private static final short PID = parseId("ads1299.usb.pid", 0x5718);
 
     /* Endpoint numbers taken from lsusb ‑v descriptor dump               */
-    private static final byte EP_OUT = 0x06;   // Bulk-OUT  (0x06)
-    private static final byte EP_IN  = (byte) 0x86; // Bulk-IN  (6 | 0x80)
+    // Application/streaming mode: 0x81 (IN), 0x01 (OUT)
+    private static final byte EP_OUT = 0x01;   // Bulk-OUT  (0x01)
+    private static final byte EP_IN  = (byte) 0x81; // Bulk-IN  (0x81)
 
     private static short parseId(String prop, int defaultVal) {
         String v = System.getProperty(prop);
@@ -71,10 +73,7 @@ public class DeviceManager implements AutoCloseable {
         if (r != LibUsb.SUCCESS)
             throw new LibUsbException("Unable to open device", r);
         LibUsb.claimInterface(h, 0);     // assuming interface 0
-        // select alt-setting 1 which holds the streaming IN endpoint
-        r = LibUsb.setInterfaceAltSetting(h, 0, 1);
-        if (r != LibUsb.SUCCESS)
-            throw new LibUsbException("Alt-setting switch failed", r);
+        // No alt-setting switch: application/streaming mode has only alt-setting 0
         return new DeviceManager(h);
     }
 
