@@ -88,4 +88,10 @@ public class DeviceManager implements AutoCloseable {
     public int writeCommand(byte[] cmd) throws LibUsbException {
         return UsbUtil.bulkWrite(handle, 0x01, cmd, 1000);  // EP 0x01 OUT
     }
+
+    /** Returns number of bytes obtained from a quick, non-blocking read. */
+    public int probeRead() throws LibUsbException {
+        byte[] data = UsbUtil.bulkRead(handle, 0x81, 24, 250);   // 1 packet
+        return data.length;
+    }
 }

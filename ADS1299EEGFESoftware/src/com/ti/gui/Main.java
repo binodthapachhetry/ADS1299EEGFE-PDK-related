@@ -17,6 +17,14 @@ public class Main {
             frame.setVisible(true);
 
             try (com.ti.usb.DeviceManager dm = com.ti.usb.DeviceManager.openFirstADS1299()) {
+                int n = dm.probeRead();                                        // NEW
+                System.out.println("ADS1299 USB link OK – " + n +              // NEW
+                                   " bytes received");                         // NEW
+                JOptionPane.showMessageDialog(frame,                           // NEW
+                        "ADS1299 connected.\nFirst USB packet contained " +    // NEW
+                        n + " bytes.",                                         // NEW
+                        "Connection verified",                                 // NEW
+                        JOptionPane.INFORMATION_MESSAGE);                      // NEW
                 // optional: start StreamEngine here
             } catch (org.usb4java.LibUsbException ex) {
                 JOptionPane.showMessageDialog(null,
